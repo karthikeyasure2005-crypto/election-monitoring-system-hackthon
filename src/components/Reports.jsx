@@ -41,18 +41,18 @@ export default function Reports({ reports, onSubmitReport }) {
     }
   }
 
-  const getReportTypeLabel = (type) => {
-    return reportTypes.find(r => r.value === type)?.label || type
+  const handleClear = () => {
+    setFormData({
+      name: '',
+      email: '',
+      reportType: 'issue',
+      title: '',
+      description: '',
+    })
   }
 
-  const getReportColor = (type) => {
-    const colors = {
-      issue: '#dc2626',
-      irregularity: '#f59e0b',
-      observation: '#3b82f6',
-      suggestion: '#10b981',
-    }
-    return colors[type] || '#6b7280'
+  const getReportTypeLabel = (type) => {
+    return reportTypes.find(r => r.value === type)?.label || type
   }
 
   return (
@@ -124,13 +124,7 @@ export default function Reports({ reports, onSubmitReport }) {
 
           <div className="form-buttons">
             <button type="submit" className="submit-button">Submit Report</button>
-            <button type="reset" className="clear-button" onClick={() => setFormData({
-              name: '',
-              email: '',
-              reportType: 'issue',
-              title: '',
-              description: '',
-            })}>Clear Form</button>
+            <button type="button" className="clear-button" onClick={handleClear}>Clear Form</button>
           </div>
         </form>
       </div>
