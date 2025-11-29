@@ -4,6 +4,7 @@ import Dashboard from './components/Dashboard'
 import Voting from './components/Voting'
 import Results from './components/Results'
 import Admin from './components/Admin'
+import AdminPortal from './components/AdminPortal'
 import Reports from './components/Reports'
 import Login from './components/Login'
 import AdminLogin from './components/AdminLogin'
@@ -134,6 +135,13 @@ function App() {
       return <AdminLogin onAdminLogin={handleAdminLogin} onBack={() => setCurrentView('dashboard')} />
     }
     return <Login onLogin={handleLogin} onShowAdminLogin={() => setCurrentView('admin-login')} />
+  }
+
+  // If authenticated admin, show dedicated AdminPortal (no voting/dashboard)
+  if (user && user.role === 'admin') {
+    return (
+      <AdminPortal votes={votes} voteHistory={voteHistory} onReset={resetVotes} user={user} onLogout={handleLogout} />
+    )
   }
 
   return (
