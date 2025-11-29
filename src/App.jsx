@@ -5,8 +5,11 @@ import Voting from './components/Voting'
 import Results from './components/Results'
 import Admin from './components/Admin'
 import Reports from './components/Reports'
+import Login from './components/Login'
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [user, setUser] = useState(null)
   const [currentView, setCurrentView] = useState('dashboard')
   const [reports, setReports] = useState([])
   const [votes, setVotes] = useState({
@@ -104,10 +107,36 @@ function App() {
     setReports(prev => [newReport, ...prev])
   }
 
+  // handle login
+  const handleLogin = (userData) => {
+    setUser(userData)
+    setIsAuthenticated(true)
+  }
+
+  // handle logout
+  const handleLogout = () => {
+    setIsAuthenticated(false)
+    setUser(null)
+    setCurrentView('dashboard')
+  }
+
+  // if not authenticated, show login page
+  if (!isAuthenticated) {
+    return <Login onLogin={handleLogin} />
+  }
+
   return (
     <div className="app-container">
       <header className="app-header">
-        <h1>🗳️ Election Monitoring System</h1>
+        <div className="header-top">
+          <h1>🗳️ Election Monitoring System</h1>
+          {user && (
+            <div className="user-info">
+              <span className="user-badge">👤 {user.username}</span>
+              <button className="logout-button" onClick={handleLogout}>Logout</button>
+            </div>
+          )}
+        </div>
         <nav className="nav-menu">
           <button 
             className={currentView === 'dashboard' ? 'nav-btn active' : 'nav-btn'}
