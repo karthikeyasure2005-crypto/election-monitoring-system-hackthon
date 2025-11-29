@@ -1,0 +1,1150 @@
+#root {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #1e40af;
+  --success-color: #16a34a;
+  --danger-color: #dc2626;
+  --warning-color: #f59e0b;
+  --bg-light: #f3f4f6;
+  --text-dark: #1f2937;
+  --border-color: #e5e7eb;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9fafb;
+  color: var(--text-dark);
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+.app-header {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: white;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.app-header h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.nav-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid transparent;
+  padding: 0.5rem 1.2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.nav-btn.active {
+  background: white;
+  color: var(--primary-color);
+  border-color: white;
+}
+
+/* Main Content */
+.app-main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Footer */
+.app-footer {
+  background-color: var(--text-dark);
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: auto;
+}
+
+/* Dashboard */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.dashboard-header {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-header h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-dark);
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.stat-box {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.candidates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.candidate-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid var(--primary-color);
+}
+
+.candidate-info {
+  margin-bottom: 1rem;
+}
+
+.candidate-info h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.party-name {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.vote-display {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.vote-bar-container {
+  width: 100%;
+  height: 24px;
+  background-color: var(--bg-light);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.vote-bar {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.vote-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+}
+
+.vote-count {
+  color: var(--text-dark);
+}
+
+.vote-percentage {
+  color: var(--primary-color);
+  font-size: 1.1rem;
+}
+
+/* Voting */
+.voting-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.voting-header {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.voting-header h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.already-voted {
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+.voting-notice {
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+.voting-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.voting-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.voting-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.candidate-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.candidate-details {
+  margin-bottom: 1.5rem;
+}
+
+.candidate-details h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.candidate-details .party {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.vote-button {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.vote-button:hover:not(.disabled) {
+  background-color: var(--secondary-color);
+  transform: scale(1.05);
+}
+
+.vote-button.disabled {
+  background-color: #d1d5db;
+  cursor: not-allowed;
+}
+
+.voting-info {
+  background: #dbeafe;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border-left: 4px solid var(--primary-color);
+}
+
+.voting-info p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+/* Results */
+.results-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.results-header {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.results-header h2 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.total-votes {
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.winner-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.winner-section h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+.winner-card {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  text-align: center;
+}
+
+.winner-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.winner-party {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+}
+
+.winner-votes {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.results-list {
+  background: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.results-header-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 150px 80px 80px;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background-color: var(--bg-light);
+  font-weight: 700;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.result-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 150px 80px 80px;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  align-items: center;
+}
+
+.result-row:last-child {
+  border-bottom: none;
+}
+
+.rank {
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.vote-history {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.vote-history h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.history-item {
+  display: grid;
+  grid-template-columns: 150px 150px 1fr;
+  gap: 1rem;
+  padding: 0.75rem;
+  background-color: var(--bg-light);
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.time {
+  color: #6b7280;
+}
+
+.voter-id {
+  font-family: monospace;
+  color: var(--primary-color);
+}
+
+.voted-for {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.no-results {
+  background: #eff6ff;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  border-left: 4px solid var(--primary-color);
+}
+
+.no-results p {
+  margin: 0.5rem 0;
+}
+
+/* Admin Panel */
+.admin-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.admin-header {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.admin-header h2 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.admin-notice {
+  color: #dc2626;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.admin-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.admin-section h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.stat-item {
+  background-color: var(--bg-light);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border-left: 3px solid var(--primary-color);
+}
+
+.stat-item label {
+  display: block;
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.stat-val {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.vote-table {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 1fr 120px 120px;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background-color: var(--bg-light);
+  font-weight: 700;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 1fr 120px 120px;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.activity-log {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.log-entry {
+  display: flex;
+  gap: 1rem;
+  padding: 0.75rem;
+  background-color: var(--bg-light);
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  align-items: center;
+}
+
+.log-number {
+  background-color: var(--primary-color);
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.log-time {
+  color: #6b7280;
+  min-width: 180px;
+}
+
+.log-voter {
+  font-family: monospace;
+  color: var(--primary-color);
+  flex: 1;
+}
+
+.log-action {
+  color: #d1d5db;
+}
+
+.log-candidate {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.no-activity {
+  text-align: center;
+  color: #6b7280;
+  padding: 2rem;
+}
+
+.danger-zone {
+  border-left: 4px solid var(--danger-color);
+}
+
+.warning {
+  color: var(--danger-color);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.reset-button {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--danger-color);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.reset-button:hover {
+  background-color: #b91c1c;
+  transform: scale(1.05);
+}
+
+.info-box {
+  background-color: var(--bg-light);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.info-box p {
+  margin: 0;
+}
+
+.info-box strong {
+  color: var(--primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .app-main {
+    max-width: 100%;
+    padding: 1.5rem;
+  }
+
+  .candidates-grid,
+  .voting-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .stats-row {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  .app-container {
+    min-height: 100vh;
+  }
+
+  .app-header {
+    padding: 1rem;
+  }
+
+  .app-header h1 {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .nav-menu {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .nav-btn {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+    flex: 1;
+    min-width: 80px;
+  }
+
+  .app-main {
+    padding: 1rem;
+    max-width: 100%;
+  }
+
+  .dashboard-header {
+    padding: 1.5rem;
+  }
+
+  .dashboard-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .candidates-grid,
+  .voting-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .candidate-card,
+  .voting-card {
+    padding: 1rem;
+  }
+
+  .candidate-info h3 {
+    font-size: 1.1rem;
+  }
+
+  .candidate-avatar {
+    width: 70px;
+    height: 70px;
+  }
+
+  .stats-row {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .stat-box {
+    padding: 1rem 0.75rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .voting-header,
+  .results-header,
+  .admin-header {
+    padding: 1.5rem;
+  }
+
+  .voting-header h2,
+  .results-header h2,
+  .admin-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .vote-button {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .results-list {
+    overflow-x: auto;
+  }
+
+  .results-header-row,
+  .result-row {
+    grid-template-columns: 30px 1fr 60px 60px 60px;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .rank {
+    font-size: 0.9rem;
+  }
+
+  .table-header,
+  .table-row {
+    grid-template-columns: 1fr 80px 80px;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .winner-card {
+    padding: 1rem;
+  }
+
+  .winner-name {
+    font-size: 1.25rem;
+  }
+
+  .winner-votes {
+    font-size: 1rem;
+  }
+
+  .vote-history h3 {
+    font-size: 1.1rem;
+  }
+
+  .history-item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .log-entry {
+    gap: 0.5rem;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .log-time {
+    min-width: 140px;
+    font-size: 0.75rem;
+  }
+
+  .admin-section {
+    padding: 1.5rem;
+  }
+
+  .admin-section h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .stat-item {
+    padding: 0.75rem;
+  }
+
+  .stat-val {
+    font-size: 1.25rem;
+  }
+
+  .reset-button {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .info-box {
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+
+  .info-box p {
+    font-size: 0.9rem;
+  }
+
+  .voting-info {
+    padding: 1rem;
+  }
+
+  .voting-info p {
+    font-size: 0.85rem;
+  }
+
+  .app-footer {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 13px;
+  }
+
+  .app-header {
+    padding: 0.75rem;
+  }
+
+  .app-header h1 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .nav-menu {
+    gap: 0.3rem;
+  }
+
+  .nav-btn {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.7rem;
+    flex: 1;
+    min-width: 60px;
+  }
+
+  .app-main {
+    padding: 0.75rem;
+  }
+
+  .dashboard-header,
+  .voting-header,
+  .results-header,
+  .admin-header,
+  .admin-section {
+    padding: 1rem;
+  }
+
+  .dashboard-header h2,
+  .voting-header h2,
+  .results-header h2,
+  .admin-header h2,
+  .admin-section h3 {
+    font-size: 1.2rem;
+  }
+
+  .candidates-grid,
+  .voting-grid {
+    gap: 0.75rem;
+  }
+
+  .candidate-card,
+  .voting-card {
+    padding: 0.75rem;
+  }
+
+  .candidate-info h3 {
+    font-size: 1rem;
+  }
+
+  .candidate-avatar {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 0.75rem;
+  }
+
+  .candidate-details {
+    margin-bottom: 1rem;
+  }
+
+  .party-name,
+  .candidate-details .party {
+    font-size: 0.8rem;
+  }
+
+  .description {
+    font-size: 0.75rem;
+  }
+
+  .stats-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .stat-box {
+    padding: 0.75rem;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+  }
+
+  .stat-value {
+    font-size: 1.25rem;
+  }
+
+  .vote-button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .vote-bar-container {
+    height: 20px;
+  }
+
+  .results-header-row,
+  .result-row {
+    grid-template-columns: 25px 1fr 50px 50px;
+    gap: 0.3rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .result-row:nth-child(even) {
+    background-color: #fafafa;
+  }
+
+  .table-header,
+  .table-row {
+    grid-template-columns: 1fr 70px 70px;
+    gap: 0.3rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .winner-section {
+    padding: 1rem;
+  }
+
+  .winner-section h3 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .winner-card {
+    padding: 0.75rem;
+  }
+
+  .winner-name {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .winner-party {
+    font-size: 0.85rem;
+  }
+
+  .winner-votes {
+    font-size: 0.9rem;
+  }
+
+  .vote-history h3 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .history-list {
+    gap: 0.5rem;
+    max-height: 300px;
+  }
+
+  .history-item {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+    padding: 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .time {
+    font-size: 0.7rem;
+  }
+
+  .voter-id,
+  .log-voter {
+    font-size: 0.65rem;
+  }
+
+  .voted-for {
+    font-size: 0.75rem;
+  }
+
+  .log-entry {
+    gap: 0.3rem;
+    padding: 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .log-number {
+    width: 20px;
+    height: 20px;
+    font-size: 0.7rem;
+  }
+
+  .log-time {
+    min-width: 120px;
+    font-size: 0.7rem;
+  }
+
+  .log-action {
+    display: none;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .stat-item {
+    padding: 0.5rem;
+  }
+
+  .stat-item label {
+    font-size: 0.75rem;
+  }
+
+  .stat-val {
+    font-size: 1.1rem;
+  }
+
+  .reset-button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .info-box {
+    padding: 0.75rem;
+    gap: 0.4rem;
+  }
+
+  .info-box p {
+    font-size: 0.8rem;
+  }
+
+  .voting-info {
+    padding: 0.75rem;
+  }
+
+  .voting-info p {
+    font-size: 0.75rem;
+    margin: 0.3rem 0;
+  }
+
+  .no-results {
+    padding: 1rem;
+  }
+
+  .no-results p {
+    font-size: 0.85rem;
+  }
+
+  .warning {
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .admin-notice {
+    font-size: 0.8rem;
+  }
+
+  .app-footer {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+  }
+}
