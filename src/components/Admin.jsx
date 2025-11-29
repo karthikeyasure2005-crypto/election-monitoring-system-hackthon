@@ -7,15 +7,38 @@ const candidates = [
   { id: 'candidate4', name: 'Emma Davis' },
 ]
 
-export default function Admin({ votes, voteHistory, onReset }) {
+export default function Admin({ votes, voteHistory, onReset, user }) {
   const totalVotes = Object.values(votes).reduce((a, b) => a + b, 0)
   const avgVotesPerCandidate = totalVotes > 0 ? (totalVotes / 4).toFixed(2) : 0
+  // Restrict access: only show admin panel to users with role 'admin'
+  if (!user || user.role !== 'admin') {
+    return (
+      <div className="admin-container">
+        <div className="admin-header">
+          <h2>Admin Panel</h2>
+          <p className="admin-notice">Access denied — administrators only</p>
+        </div>
+        <div className="admin-section">
+          <p className="no-activity">You do not have permission to view this page.</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="admin-container">
       <div className="admin-header">
         <h2>Admin Panel</h2>
         <p className="admin-notice">Restricted access: System administrators only</p>
+      </div>
+
+      <div className="admin-section">
+        <h3>Admin Account</h3>
+        <div className="info-box">
+          <p><strong>Username:</strong> {user?.username}</p>
+          <p><strong>Role:</strong> {user?.role}</p>
+          <p><strong>Logged In:</strong> {user?.loginTime || 'N/A'}</p>
+        </div>
       </div>
 
       <div className="admin-section">

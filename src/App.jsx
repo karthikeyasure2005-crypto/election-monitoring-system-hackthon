@@ -188,7 +188,7 @@ function App() {
         {currentView === 'dashboard' && <Dashboard votes={votes} totalVoters={voteHistory.length} />}
         {currentView === 'voting' && <Voting onVote={castVote} hasVoted={hasVoted} voterId={voterId} />}
         {currentView === 'results' && <Results votes={votes} voteHistory={voteHistory} />}
-        {currentView === 'admin' && <Admin votes={votes} voteHistory={voteHistory} onReset={resetVotes} />}
+        {currentView === 'admin' && <Admin votes={votes} voteHistory={voteHistory} onReset={resetVotes} user={user} />}
         {currentView === 'reports' && <Reports reports={reports} onSubmitReport={handleSubmitReport} />}
       </main>
 
