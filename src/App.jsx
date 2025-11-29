@@ -6,6 +6,7 @@ import Results from './components/Results'
 import Admin from './components/Admin'
 import Reports from './components/Reports'
 import Login from './components/Login'
+import AdminLogin from './components/AdminLogin'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -113,6 +114,13 @@ function App() {
     setIsAuthenticated(true)
   }
 
+  // handle admin login (separate admin-only page)
+  const handleAdminLogin = (adminData) => {
+    setUser(adminData)
+    setIsAuthenticated(true)
+    setCurrentView('admin')
+  }
+
   // handle logout
   const handleLogout = () => {
     setIsAuthenticated(false)
@@ -120,9 +128,12 @@ function App() {
     setCurrentView('dashboard')
   }
 
-  // if not authenticated, show login page
+  // if not authenticated, allow public Login or AdminLogin view
   if (!isAuthenticated) {
-    return <Login onLogin={handleLogin} />
+    if (currentView === 'admin-login') {
+      return <AdminLogin onAdminLogin={handleAdminLogin} onBack={() => setCurrentView('dashboard')} />
+    }
+    return <Login onLogin={handleLogin} onShowAdminLogin={() => setCurrentView('admin-login')} />
   }
 
   return (
@@ -156,12 +167,14 @@ function App() {
           >
             Results
           </button>
-          <button 
-            className={currentView === 'admin' ? 'nav-btn active' : 'nav-btn'}
-            onClick={() => setCurrentView('admin')}
-          >
-            Admin
-          </button>
+          {user && user.role === 'admin' && (
+            <button 
+              className={currentView === 'admin' ? 'nav-btn active' : 'nav-btn'}
+              onClick={() => setCurrentView('admin')}
+            >
+              Admin
+            </button>
+          )}
           <button 
             className={currentView === 'reports' ? 'nav-btn active' : 'nav-btn'}
             onClick={() => setCurrentView('reports')}

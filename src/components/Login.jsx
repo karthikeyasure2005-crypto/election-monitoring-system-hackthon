@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function Login({ onLogin }) {
+export default function Login({ onLogin, onShowAdminLogin }) {
   const [credentials, setCredentials] = useState({
     username: '',
     password: '',
@@ -107,9 +107,14 @@ export default function Login({ onLogin }) {
               />
             </div>
 
-            <button type="submit" className="login-button" disabled={isLoading}>
-              {isLoading ? 'Logging in...' : 'Login'}
-            </button>
+            <div className="form-buttons">
+              <button type="submit" className="login-button" disabled={isLoading}>
+                {isLoading ? 'Logging in...' : 'Login'}
+              </button>
+              <button type="button" className="clear-button" onClick={() => onShowAdminLogin && onShowAdminLogin()}>
+                Admin Login
+              </button>
+            </div>
           </form>
 
           <div className="login-info">
