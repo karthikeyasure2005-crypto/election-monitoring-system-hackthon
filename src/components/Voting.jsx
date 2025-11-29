@@ -7,13 +7,19 @@ const candidates = [
   { id: 'candidate4', name: 'Emma Davis', party: 'Green Party', color: '#16a34a', description: 'Sustainability & Social Justice' },
 ]
 
-export default function Voting({ onVote, hasVoted }) {
+export default function Voting({ onVote, hasVoted, voterId }) {
   return (
     <div className="voting-container">
       <div className="voting-header">
         <h2>Cast Your Vote</h2>
-        {hasVoted && <p className="already-voted">✓ You have already voted in this election</p>}
-        {!hasVoted && <p className="voting-notice">Select your preferred candidate below</p>}
+        {hasVoted ? (
+          <div style={{display: 'flex', gap: '0.5rem', alignItems: 'center'}}>
+            <span className="already-voted">✓ You have voted</span>
+            {voterId && <small style={{color: '#f3f4f6', opacity: 0.9}}>ID: {voterId}</small>}
+          </div>
+        ) : (
+          <p className="voting-notice">Select your preferred candidate below</p>
+        )}
       </div>
 
       <div className="voting-grid">
@@ -27,8 +33,8 @@ export default function Voting({ onVote, hasVoted }) {
             </div>
             <button
               onClick={() => onVote(candidate.id)}
-              disabled={hasVoted}
               className={`vote-button ${hasVoted ? 'disabled' : ''}`}
+              disabled={hasVoted}
             >
               {hasVoted ? 'Voted' : 'Vote'}
             </button>
@@ -36,12 +42,10 @@ export default function Voting({ onVote, hasVoted }) {
         ))}
       </div>
 
-      {!hasVoted && (
-        <div className="voting-info">
-          <p>💡 Your vote is anonymous and secure.</p>
-          <p>🔒 Each voter can only vote once.</p>
-        </div>
-      )}
+      <div className="voting-info">
+        <p>💡 Your vote is anonymous and secure.</p>
+        <p>{hasVoted ? '🔒 You cannot vote again from this browser.' : '🔓 You can vote once from this browser.'}</p>
+      </div>
     </div>
   )
 }

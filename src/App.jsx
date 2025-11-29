@@ -13,14 +13,31 @@ function App() {
     candidate3: 0,
     candidate4: 0,
   })
-  const [hasVoted, setHasVoted] = useState(false)
   const [voteHistory, setVoteHistory] = useState([])
+  // enforce one vote per browser using localStorage
+  const [hasVoted, setHasVoted] = useState(() => {
+    try {
+      return localStorage.getItem('hasVoted') === 'true'
+    } catch (e) {
+      return false
+    }
+  })
+  const [voterId, setVoterId] = useState(() => {
+    try {
+      return localStorage.getItem('voterId') || null
+    } catch (e) {
+      return null
+    }
+  })
 
   const castVote = (candidateId) => {
     if (hasVoted) {
-      alert('You have already voted!')
+      alert('You have already voted in this browser.')
       return
     }
+
+    const newVoterId = voterId || Math.random().toString(36).substr(2, 9)
+
     setVotes(prev => ({
       ...prev,
       [candidateId]: prev[candidateId] + 1
@@ -28,8 +45,18 @@ function App() {
     setVoteHistory(prev => [...prev, {
       candidateId,
       timestamp: new Date().toLocaleString(),
-      voterId: Math.random().toString(36).substr(2, 9)
+      voterId: newVoterId
     }])
+
+    // persist voting flag and id so this browser can't vote again
+    try {
+      localStorage.setItem('hasVoted', 'true')
+      localStorage.setItem('voterId', newVoterId)
+    } catch (e) {
+      // ignore localStorage errors
+    }
+
+    setVoterId(newVoterId)
     setHasVoted(true)
     alert('Vote recorded successfully!')
   }
@@ -43,8 +70,26 @@ function App() {
         candidate4: 0,
       })
       setVoteHistory([])
+      // clear localStorage voting lock so browsers can vote again
+      try {
+        localStorage.removeItem('hasVoted')
+        localStorage.removeItem('voterId')
+      } catch (e) {}
       setHasVoted(false)
+      setVoterId(null)
     }
+  }
+
+  // simulate an external vote (bypasses local browser lock)
+  const simulateVote = (candidateId) => {
+    const externalId = `external-${Math.random().toString(36).substr(2,6)}`
+    setVotes(prev => ({ ...prev, [candidateId]: prev[candidateId] + 1 }))
+    setVoteHistory(prev => [...prev, { candidateId, timestamp: new Date().toLocaleString(), voterId: externalId }])
+  }
+
+  // expose a global hook used by Admin simulate button (simple demo)
+  if (typeof window !== 'undefined') {
+    window.__simulateExternalVote = simulateVote
   }
 
   return (
@@ -81,7 +126,7 @@ function App() {
 
       <main className="app-main">
         {currentView === 'dashboard' && <Dashboard votes={votes} totalVoters={voteHistory.length} />}
-        {currentView === 'voting' && <Voting onVote={castVote} hasVoted={hasVoted} />}
+        {currentView === 'voting' && <Voting onVote={castVote} hasVoted={hasVoted} voterId={voterId} />}
         {currentView === 'results' && <Results votes={votes} voteHistory={voteHistory} />}
         {currentView === 'admin' && <Admin votes={votes} voteHistory={voteHistory} onReset={resetVotes} />}
       </main>

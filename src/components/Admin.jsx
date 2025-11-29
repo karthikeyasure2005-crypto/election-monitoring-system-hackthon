@@ -84,6 +84,16 @@ export default function Admin({ votes, voteHistory, onReset }) {
         )}
       </div>
 
+      <div className="admin-section">
+        <h3>Demo: Simulate External Vote</h3>
+        <p className="text-sm">Simulate a vote from another browser/session (won't affect your local vote lock).</p>
+        <SimulateVoteForm onSimulate={(candidateId) => {
+          if (typeof window !== 'undefined' && window.__simulateExternalVote) {
+            window.__simulateExternalVote(candidateId)
+          }
+        }} />
+      </div>
+
       <div className="admin-section danger-zone">
         <h3>Danger Zone</h3>
         <p className="warning">⚠️ These actions cannot be undone</p>
@@ -101,6 +111,21 @@ export default function Admin({ votes, voteHistory, onReset }) {
           <p><strong>Security Level:</strong> High</p>
         </div>
       </div>
+    </div>
+  )
+}
+
+function SimulateVoteForm({ onSimulate }) {
+  const [candidate, setCandidate] = React.useState('candidate1')
+  return (
+    <div style={{display: 'flex', gap: '0.5rem', alignItems: 'center'}}>
+      <select value={candidate} onChange={(e) => setCandidate(e.target.value)}>
+        <option value="candidate1">John Smith</option>
+        <option value="candidate2">Sarah Johnson</option>
+        <option value="candidate3">Mike Chen</option>
+        <option value="candidate4">Emma Davis</option>
+      </select>
+      <button className="reset-button" onClick={() => onSimulate(candidate)}>Simulate External Vote</button>
     </div>
   )
 }
