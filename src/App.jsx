@@ -4,9 +4,11 @@ import Dashboard from './components/Dashboard'
 import Voting from './components/Voting'
 import Results from './components/Results'
 import Admin from './components/Admin'
+import Reports from './components/Reports'
 
 function App() {
   const [currentView, setCurrentView] = useState('dashboard')
+  const [reports, setReports] = useState([])
   const [votes, setVotes] = useState({
     candidate1: 0,
     candidate2: 0,
@@ -92,6 +94,16 @@ function App() {
     window.__simulateExternalVote = simulateVote
   }
 
+  // handle report submission
+  const handleSubmitReport = (formData) => {
+    const newReport = {
+      ...formData,
+      id: Math.random().toString(36).substr(2, 9),
+      timestamp: new Date().toLocaleString(),
+    }
+    setReports(prev => [newReport, ...prev])
+  }
+
   return (
     <div className="app-container">
       <header className="app-header">
@@ -121,6 +133,12 @@ function App() {
           >
             Admin
           </button>
+          <button 
+            className={currentView === 'reports' ? 'nav-btn active' : 'nav-btn'}
+            onClick={() => setCurrentView('reports')}
+          >
+            Report
+          </button>
         </nav>
       </header>
 
@@ -129,6 +147,7 @@ function App() {
         {currentView === 'voting' && <Voting onVote={castVote} hasVoted={hasVoted} voterId={voterId} />}
         {currentView === 'results' && <Results votes={votes} voteHistory={voteHistory} />}
         {currentView === 'admin' && <Admin votes={votes} voteHistory={voteHistory} onReset={resetVotes} />}
+        {currentView === 'reports' && <Reports reports={reports} onSubmitReport={handleSubmitReport} />}
       </main>
 
       <footer className="app-footer">
