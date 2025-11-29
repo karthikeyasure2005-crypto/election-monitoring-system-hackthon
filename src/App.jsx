@@ -140,7 +140,14 @@ function App() {
   // If authenticated admin, show dedicated AdminPortal (no voting/dashboard)
   if (user && user.role === 'admin') {
     return (
-      <AdminPortal votes={votes} voteHistory={voteHistory} onReset={resetVotes} user={user} onLogout={handleLogout} />
+      <AdminPortal
+        votes={votes}
+        voteHistory={voteHistory}
+        onReset={resetVotes}
+        user={user}
+        reports={reports}
+        onLogout={handleLogout}
+      />
     )
   }
 
@@ -196,7 +203,7 @@ function App() {
         {currentView === 'dashboard' && <Dashboard votes={votes} totalVoters={voteHistory.length} />}
         {currentView === 'voting' && <Voting onVote={castVote} hasVoted={hasVoted} voterId={voterId} />}
         {currentView === 'results' && <Results votes={votes} voteHistory={voteHistory} />}
-        {currentView === 'admin' && <Admin votes={votes} voteHistory={voteHistory} onReset={resetVotes} user={user} />}
+        {currentView === 'admin' && <Admin votes={votes} voteHistory={voteHistory} onReset={resetVotes} user={user} reports={reports} />}
         {currentView === 'reports' && <Reports reports={reports} onSubmitReport={handleSubmitReport} />}
       </main>
 

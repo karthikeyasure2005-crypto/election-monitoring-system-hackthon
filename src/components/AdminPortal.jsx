@@ -1,7 +1,7 @@
 import React from 'react'
 import Admin from './Admin'
 
-export default function AdminPortal({ votes, voteHistory, onReset, user, onLogout }) {
+export default function AdminPortal({ votes, voteHistory, onReset, user, onLogout, reports }) {
   return (
     <div className="admin-portal-container">
       <header className="admin-portal-header">
@@ -18,7 +18,7 @@ export default function AdminPortal({ votes, voteHistory, onReset, user, onLogou
       </header>
 
       <main style={{padding: '1.5rem'}}>
-        <Admin votes={votes} voteHistory={voteHistory} onReset={onReset} user={user} />
+        <Admin votes={votes} voteHistory={voteHistory} onReset={onReset} user={user} reports={reports} />
       </main>
     </div>
   )

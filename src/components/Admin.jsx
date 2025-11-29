@@ -7,7 +7,7 @@ const candidates = [
   { id: 'candidate4', name: 'Emma Davis' },
 ]
 
-export default function Admin({ votes, voteHistory, onReset, user }) {
+export default function Admin({ votes, voteHistory, onReset, user, reports = [] }) {
   const totalVotes = Object.values(votes).reduce((a, b) => a + b, 0)
   const avgVotesPerCandidate = totalVotes > 0 ? (totalVotes / 4).toFixed(2) : 0
   // Restrict access: only show admin panel to users with role 'admin'
@@ -83,6 +83,32 @@ export default function Admin({ votes, voteHistory, onReset, user }) {
             )
           })}
         </div>
+      </div>
+
+      <div className="admin-section">
+        <h3>Submitted Reports</h3>
+        {reports && reports.length > 0 ? (
+          <div className="reports-list">
+            {reports.map((r, i) => (
+              <div key={r.id || i} className={`report-item ${r.reportType || ''}`}>
+                <div className="report-header">
+                  <div>
+                    <span className="report-type-badge type-{r.reportType}">{r.reportType ? r.reportType.toUpperCase() : 'REPORT'}</span>
+                    <h4 className="report-title">{r.title}</h4>
+                  </div>
+                  <span className="report-timestamp">{r.timestamp}</span>
+                </div>
+                <p className="report-description">{r.description}</p>
+                <div className="report-meta">
+                  {r.name && <span className="meta-item"><span className="meta-label">By:</span> {r.name}</span>}
+                  {r.email && <span className="meta-item"><span className="meta-label">Email:</span> {r.email}</span>}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="no-reports"><p>No reports submitted yet.</p></div>
+        )}
       </div>
 
       <div className="admin-section">
